@@ -7,7 +7,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,700;1,6..96,900&family=Jost:wght@400;500&family=Kalam:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,700;1,6..96,900&family=Jost:wght@400;500;600&family=Kalam:wght@400;700&display=swap">
 <style>
 /* Layout: one folded card standing on a dark tabletop under a warm lamp; the card is the whole page, controls sit quietly underneath. */
 :root{
@@ -15,8 +15,8 @@
   --table-hi:#2b3354;
   --paper:#fbf6ee;
   --ink:#24378f;           /* ballpoint blue */
-  --card:#e0506c;
-  --card-deep:#a92f4d;
+  --card:#c43358;
+  --card-deep:#8a1c3c;
   --print:#c93d5c;         /* pink print ink on the inside */
   --gold:#e3bd62;
   --muted:#a3abc8;
@@ -79,7 +79,7 @@ body{
 .face::after{ /* light / shade layer driven from JS */
   content:"";position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(circle at var(--sx,50%) var(--sy,30%),rgba(255,255,255,.22),transparent 55%),
+    radial-gradient(circle at var(--sx,50%) var(--sy,30%),rgba(255,255,255,.13),transparent 55%),
     rgba(14,10,32,var(--shade,0));
   mix-blend-mode:normal;
 }
@@ -91,7 +91,7 @@ body{
 .pink{
   background:
     var(--grain),
-    radial-gradient(120% 90% at 18% 8%,#ee7891 0%,var(--card) 45%,var(--card-deep) 125%);
+    radial-gradient(120% 90% at 18% 8%,#d9506f 0%,var(--card) 45%,var(--card-deep) 125%);
   box-shadow:inset 0 0 0 .5px rgba(255,255,255,.18);
 }
 .inside-left,.back{transform:rotateY(180deg)}
@@ -128,16 +128,25 @@ body{
   pointer-events:none;
 }
 
+/* small foil lines: narrower, warmer foil and a crisp dark edge so they stay legible under the light */
+.to.foil,.front-copy .date.foil{
+  background:linear-gradient(105deg,#c99a3c 0%,#f2d27c 35%,#fbe4a6 50%,#e2b456 65%,#c99a3c 100%);
+  background-size:180% 100%;background-position:var(--fx,50%) 50%;
+  -webkit-background-clip:text;background-clip:text;
+  padding-block:.3em; /* room for the tilde on Ñ */
+  filter:drop-shadow(0 .8px 0 rgba(60,0,22,.7));
+}
+
 /* ---------- front ---------- */
 .to{
   position:absolute;left:12%;top:10.5%;
-  font:500 calc(var(--w)*.038)/1 var(--ui);
-  letter-spacing:.3em;text-transform:uppercase;
+  font:600 calc(var(--w)*.044)/1 var(--ui);
+  letter-spacing:.17em;text-transform:uppercase;
 }
 .front-copy{position:absolute;left:11%;right:9%;bottom:11%}
 .front-copy .date{
-  display:block;margin-top:calc(var(--w)*.045);
-  font:500 calc(var(--w)*.03)/1 var(--ui);letter-spacing:.28em;text-transform:uppercase;
+  display:block;margin-top:calc(var(--w)*.022);
+  font:600 calc(var(--w)*.037)/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;
 }
 .front-copy .big{
   display:block;
@@ -464,6 +473,7 @@ body{
     targetO = v ? 1 : 0;
     if (reduce) o = targetO;
     btnOpen.textContent = v ? "Cerrar la tarjeta" : "Abrir la tarjeta";
+    if (v) { rest = Math.round(ry / 360) * 360; settle = false; vy = 0; } // if it is showing its back, turn it to the front so the inside is visible
     if (v) { setPage(0); setTimeout(() => { if (targetO === 1) burst(); }, reduce ? 0 : 520); }
     else relight();
     updateHud();
