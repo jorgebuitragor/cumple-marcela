@@ -2,7 +2,7 @@
 
 Tarjeta de cumpleaños en 3D para Marcela, que cumple 30 años el 6 de noviembre de 2026.
 
-Se siente como una tarjeta de papel: se puede girar, abrir y cerrar, el dorado brilla según el ángulo y por dentro hay un pastel con velas de número 30 para soplar.
+Se siente como una tarjeta de papel: se puede girar, abrir y cerrar, el dorado brilla según el ángulo y por dentro hay una foto de Marcela y un pastel con velas de número 30 para soplar.
 
 ## Cómo se usa
 

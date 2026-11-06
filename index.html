@@ -134,28 +134,28 @@ body{
   font:500 calc(var(--w)*.038)/1 var(--ui);
   letter-spacing:.3em;text-transform:uppercase;
 }
-.front-copy{position:absolute;left:11%;right:9%;bottom:8.5%}
+.front-copy{position:absolute;left:11%;right:9%;bottom:11%}
 .front-copy .date{
   display:block;margin-top:calc(var(--w)*.045);
   font:500 calc(var(--w)*.03)/1 var(--ui);letter-spacing:.28em;text-transform:uppercase;
 }
 .front-copy .big{
   display:block;
-  font:italic 900 calc(var(--w)*.22)/.86 var(--display);
+  font:italic 900 calc(var(--w)*.285)/.86 var(--display);
   letter-spacing:-.01em;
 }
 .front-copy .sub{
   display:block;margin-top:calc(var(--w)*.012);
-  font:italic 700 calc(var(--w)*.104)/1 var(--display);
+  font:italic 700 calc(var(--w)*.128)/1 var(--display);
 }
 
-/* ---------- photo print tipped onto the front ---------- */
+/* ---------- photo print tipped onto the inside-left page ---------- */
 .photo{
-  position:absolute;top:14.5%;right:10%;width:48%;
+  position:absolute;top:5.5%;left:28%;width:44%;
   padding:calc(var(--w)*.016) calc(var(--w)*.016) calc(var(--w)*.045);
   background:#fdfbf6;
-  transform:rotate(3deg);
-  box-shadow:0 1px 1.5px rgba(70,8,26,.35),0 6px 14px rgba(70,8,26,.3);
+  transform:rotate(-3deg);
+  box-shadow:0 1px 1.5px rgba(60,30,20,.3),0 5px 12px rgba(60,30,20,.22);
 }
 .photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .photo::after{ /* gloss that follows the light */
@@ -173,13 +173,13 @@ body{
 
 /* ---------- inside left ---------- */
 .inside-left .wrap{
-  position:absolute;inset:9% 9% 8%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:calc(var(--w)*.03);text-align:center;
+  position:absolute;inset:9% 9% 6%;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  gap:calc(var(--w)*.02);text-align:center;
 }
-.cake{width:82%;height:auto;overflow:visible}
+.cake{width:calc(var(--w)*.42);height:auto;overflow:visible}
 .wish{ /* fixed one-line height so the cake never moves when the text changes */
-  font:italic 700 calc(var(--w)*.088)/1.15 var(--display);color:var(--print);
+  font:italic 700 calc(var(--w)*.08)/1.15 var(--display);color:var(--print);
   white-space:nowrap;height:1.15em;
 }
 .wish-hint{
@@ -275,7 +275,7 @@ body{
         <div class="note">
           <p class="hello" id="hello">Querida Marcela:</p>
           <p>¡30 años! Gracias por las risas, por los secretos guardados y por estar siempre, incluso cuando no se lo pido.</p>
-          <p>Que esta nueva década le traiga todo lo que sueña, y un poquito más.</p>
+          <p>Que esta nueva década le traiga todo lo que sueña, y un poquito más. Y siga siendo la mamá tan buena y amorosa que es.</p>
           <p class="cheer">¡Feliz cumpleaños!</p>
           <div class="sign">
             <p>La quiero mucho,</p>
@@ -302,10 +302,6 @@ body{
         <div class="frame"></div>
         <div class="foil-shape" id="frontArt"></div>
         <div class="to foil" id="toLine">Para Marcela</div>
-        <div class="photo">
-          <img src="foto-marcela.jpg" alt="Foto de Marcela" width="640" height="800" draggable="false">
-          <span class="corner tl"></span><span class="corner br"></span>
-        </div>
         <div class="front-copy">
           <span class="big foil">Feliz</span>
           <span class="sub foil">cumpleaños</span>
@@ -313,6 +309,10 @@ body{
         </div>
       </div>
       <div class="face paper inside-left" id="fInLeft">
+        <div class="photo">
+          <img src="foto-marcela.jpg" alt="Foto de Marcela" width="640" height="800" draggable="false">
+          <span class="corner tl"></span><span class="corner br"></span>
+        </div>
         <div class="wrap">
           <svg class="cake" viewBox="0 0 200 190" aria-label="Pastel con velas de número 30">
             <defs>
@@ -412,6 +412,17 @@ body{
   const star = (cx, cy, r) => `<path d="M${cx} ${cy - r}Q${cx} ${cy} ${cx + r} ${cy}Q${cx} ${cy} ${cx} ${cy + r}Q${cx} ${cy} ${cx - r} ${cy}Q${cx} ${cy} ${cx} ${cy - r}Z" fill="white"/>`;
   const svgUrl = s => `url("data:image/svg+xml,${encodeURIComponent(s)}")`;
   const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" preserveAspectRatio="none">
+    <g fill="none" stroke="white" stroke-width=".9" stroke-linecap="round">
+      <ellipse cx="66" cy="27" rx="9" ry="11"/>
+      <ellipse cx="81.5" cy="40" rx="7.6" ry="9.6"/>
+      <ellipse cx="57" cy="47" rx="7" ry="9"/>
+      <path d="M61 21q2-5 6.5-5.6" /><path d="M77.6 35q1.6-4 5-4.4"/><path d="M53 42.5q1.4-3.6 4.6-4"/>
+      <path d="M66 38.4C63.5 48 70.5 54 69 66"/>
+      <path d="M81.5 50C78 57 72.4 58.5 69 66"/>
+      <path d="M57 56.4C59.5 61 66 62 69 66"/>
+      <path d="M66 63.6l3 2.4 3-2.4M69 66l-2.2 4.4M69 66l2.2 4.4"/>
+    </g>
+    <g fill="white"><path d="M64.8 38.4h2.4l-1.2 1.6z"/><path d="M80.3 49.6h2.4l-1.2 1.6z"/><path d="M55.8 56h2.4l-1.2 1.6z"/></g>
     ${star(22, 34, 3)}${star(36, 22, 1.7)}${star(91, 18, 2)}${star(89, 70, 2.6)}${star(30, 62, 1.5)}
     ${star(86, 124, 2.2)}
     <g fill="white"><circle cx="44" cy="40" r=".7"/><circle cx="92" cy="56" r=".6"/><circle cx="18" cy="52" r=".6"/><circle cx="74" cy="80" r=".7"/></g>
