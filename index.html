@@ -273,7 +273,7 @@ body{
     <div class="base">
       <div class="face paper inside-right" id="fInRight">
         <div class="note">
-          <p class="hello" id="hello">Querida Marcela:</p>
+          <p class="hello" id="hello">Hola, China:</p>
           <p>¡30 años! Gracias por las risas, por los secretos guardados y por estar siempre, incluso cuando no se lo pido.</p>
           <p>Que esta nueva década le traiga todo lo que sueña, y un poquito más. Y siga siendo la mamá tan buena y amorosa que es.</p>
           <p class="cheer">¡Feliz cumpleaños!</p>
@@ -391,7 +391,7 @@ body{
     let n = DEFAULT_NAME;
     try { const h = decodeURIComponent(location.hash.slice(1)).replace(/[-_]+/g, " ").trim(); if (h) n = h; } catch (e) {}
     $("toLine").textContent = n ? "Para " + n : "Para mi hermana";
-    $("hello").textContent = n ? "Querida " + n + ":" : "Querida hermana:";
+    $("hello").textContent = "Hola, China:";
   }
   applyName();
   addEventListener("hashchange", applyName);
