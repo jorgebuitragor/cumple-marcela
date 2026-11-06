@@ -134,20 +134,42 @@ body{
   font:500 calc(var(--w)*.038)/1 var(--ui);
   letter-spacing:.3em;text-transform:uppercase;
 }
-.front-copy{position:absolute;left:11%;right:9%;bottom:11%}
+.front-copy{position:absolute;left:11%;right:9%;bottom:8.5%}
 .front-copy .date{
   display:block;margin-top:calc(var(--w)*.045);
   font:500 calc(var(--w)*.03)/1 var(--ui);letter-spacing:.28em;text-transform:uppercase;
 }
 .front-copy .big{
   display:block;
-  font:italic 900 calc(var(--w)*.285)/.86 var(--display);
+  font:italic 900 calc(var(--w)*.22)/.86 var(--display);
   letter-spacing:-.01em;
 }
 .front-copy .sub{
   display:block;margin-top:calc(var(--w)*.012);
-  font:italic 700 calc(var(--w)*.128)/1 var(--display);
+  font:italic 700 calc(var(--w)*.104)/1 var(--display);
 }
+
+/* ---------- photo print tipped onto the front ---------- */
+.photo{
+  position:absolute;top:14.5%;right:10%;width:48%;
+  padding:calc(var(--w)*.016) calc(var(--w)*.016) calc(var(--w)*.045);
+  background:#fdfbf6;
+  transform:rotate(3deg);
+  box-shadow:0 1px 1.5px rgba(70,8,26,.35),0 6px 14px rgba(70,8,26,.3);
+}
+.photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.photo::after{ /* gloss that follows the light */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at var(--sx,50%) var(--sy,30%),rgba(255,255,255,.32),transparent 50%);
+  mix-blend-mode:screen;
+}
+.corner{
+  position:absolute;width:calc(var(--w)*.075);aspect-ratio:1;
+  background:var(--foil);background-size:260% 100%;background-position:var(--fx,50%) 50%;
+  filter:drop-shadow(0 .6px .6px rgba(70,10,25,.45));
+}
+.corner.tl{top:-3px;left:-3px;clip-path:polygon(0 0,100% 0,0 100%)}
+.corner.br{bottom:-3px;right:-3px;clip-path:polygon(100% 0,100% 100%,0 100%)}
 
 /* ---------- inside left ---------- */
 .inside-left .wrap{
@@ -280,6 +302,10 @@ body{
         <div class="frame"></div>
         <div class="foil-shape" id="frontArt"></div>
         <div class="to foil" id="toLine">Para Marcela</div>
+        <div class="photo">
+          <img src="foto-marcela.jpg" alt="Foto de Marcela" width="640" height="800" draggable="false">
+          <span class="corner tl"></span><span class="corner br"></span>
+        </div>
         <div class="front-copy">
           <span class="big foil">Feliz</span>
           <span class="sub foil">cumpleaños</span>
@@ -386,20 +412,9 @@ body{
   const star = (cx, cy, r) => `<path d="M${cx} ${cy - r}Q${cx} ${cy} ${cx + r} ${cy}Q${cx} ${cy} ${cx} ${cy + r}Q${cx} ${cy} ${cx - r} ${cy}Q${cx} ${cy} ${cx} ${cy - r}Z" fill="white"/>`;
   const svgUrl = s => `url("data:image/svg+xml,${encodeURIComponent(s)}")`;
   const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" preserveAspectRatio="none">
-    <g fill="none" stroke="white" stroke-width=".9" stroke-linecap="round">
-      <ellipse cx="66" cy="27" rx="9" ry="11"/>
-      <ellipse cx="81.5" cy="40" rx="7.6" ry="9.6"/>
-      <ellipse cx="57" cy="47" rx="7" ry="9"/>
-      <path d="M61 21q2-5 6.5-5.6" /><path d="M77.6 35q1.6-4 5-4.4"/><path d="M53 42.5q1.4-3.6 4.6-4"/>
-      <path d="M66 38.4C63.5 48 70.5 54 69 66"/>
-      <path d="M81.5 50C78 57 72.4 58.5 69 66"/>
-      <path d="M57 56.4C59.5 61 66 62 69 66"/>
-      <path d="M66 63.6l3 2.4 3-2.4M69 66l-2.2 4.4M69 66l2.2 4.4"/>
-    </g>
-    <g fill="white"><path d="M64.8 38.4h2.4l-1.2 1.6z"/><path d="M80.3 49.6h2.4l-1.2 1.6z"/><path d="M55.8 56h2.4l-1.2 1.6z"/></g>
     ${star(22, 34, 3)}${star(36, 22, 1.7)}${star(91, 18, 2)}${star(89, 70, 2.6)}${star(30, 62, 1.5)}
-    ${star(86, 124, 2.2)}${star(48, 128, 1.4)}${star(16, 126, 1.8)}
-    <g fill="white"><circle cx="44" cy="40" r=".7"/><circle cx="92" cy="56" r=".6"/><circle cx="18" cy="52" r=".6"/><circle cx="74" cy="80" r=".7"/><circle cx="66" cy="126" r=".6"/></g>
+    ${star(86, 124, 2.2)}
+    <g fill="white"><circle cx="44" cy="40" r=".7"/><circle cx="92" cy="56" r=".6"/><circle cx="18" cy="52" r=".6"/><circle cx="74" cy="80" r=".7"/></g>
   </svg>`;
   $("frontArt").style.setProperty("--art", svgUrl(frontSvg));
   $("markArt").style.setProperty("--art", svgUrl(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">${star(10, 10, 9)}</svg>`));
